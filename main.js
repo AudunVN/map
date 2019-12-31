@@ -1,108 +1,166 @@
-(function() {
-  var contents, graticule, height, path, projection, svg, width, zoom, zoomable_layer;
+var contents, graticule, height, path, projection, svg, width, zoom, zoomable_layer, labels, city_labels;
 
-  svg = d3.select('svg');
+var currentLayer = -1;
+var baseMapRendered = false;
+var labelsRendered = false;
 
-  width = 1000;
+svg = d3.select('svg');
 
-  height = 1000;
+width = 1000;
 
-  zoomable_layer = svg.append('g');
-  
- /*function resize(){
-    width = d3.select('.map-container svg').node().getBoundingClientRect().width;
-    height = d3.select('.map-container svg').node().getBoundingClientRect().height;
-    var svg_g = document.querySelector("svg > g");
-    var svg_g_height = svg_g.getBoundingClientRect().height;
-     zoomable_layer.attrs({
-      transform: [
-      "translate(" + [0, 0] + ")",
-      "scale(" + height/svg_g_height + ")"
-    ].join(" ")});
-  }*/
+height = 1000;
 
-  zoom = d3.zoom().scaleExtent([1, 50]).on('zoom', function() {
-    var e = d3.event.transform,
-        // now, constrain the x and y components of the translation by the
-        // dimensions of the viewport
-        tx = Math.min(0, Math.max(e.x, width - width * e.k)),
-        ty = Math.min(0, Math.max(e.y, height - height * e.k));
-    // then, update the zoom behavior's internal translation, so that
-    // it knows how to properly manipulate it on the next movement
-    // and finally, update the <g> element's transform attribute with the
-    // correct translation and scale (in reverse order)
-    zoomable_layer.attrs({
-      transform: [
+zoomable_layer = svg.append('g');
+
+zoom = d3.zoom().scaleExtent([1, 50]).on('zoom', function() {
+  var e = d3.event.transform,
+
+  tx = Math.min(0, Math.max(e.x, width - width * e.k)),
+  ty = Math.min(0, Math.max(e.y, height - height * e.k));
+
+  if (e.k > 7) {
+    document.querySelector("svg").classList.add("zoomed-in");
+  } else {
+    document.querySelector("svg").classList.remove("zoomed-in");
+  }
+
+  zoomable_layer.attrs({
+    transform: [
       "translate(" + [tx, ty] + ")",
       "scale(" + e.k + ")"
     ].join(" ")
-    });
-    return zoomable_layer.selectAll('.label > text').attrs({
-      transform: "scale(" + (1 / d3.event.transform.k) + ")"
-    });
   });
+  return zoomable_layer.selectAll('.label > text').attrs({
+    transform: "scale(" + (1 / d3.event.transform.k) + ")"
+  });
+});
 
-  svg.call(zoom);
+svg.call(zoom);
+
+/*window.addEventListener('resize', resize);*/
+
+projection = d3.geoPierceQuincuncial()
+  .scale(223.5)
+  .translate([width / 2, height / 2])
+  .precision(0.1);
+
+path = d3.geoPath(projection);
+
+graticule = d3.geoGraticule();
+
+/*svg.append('defs').append('path').datum(graticule.outline()).attrs({
+  id: 'sphere',
+  d: path
+});*/
+
+zoomable_layer.append("path")
+  .datum({type: "Sphere"})
+  .attr("id", "sphere")
+  .attr("d", path);
+
+zoomable_layer.append('use').attrs({
+  "class": 'sphere_stroke',
+  'xlink:href': '#sphere'
+});
+
+zoomable_layer.append('use').attrs({
+  "class": 'sphere_fill',
+  'xlink:href': '#sphere'
+});
+
+contents = zoomable_layer.append('g');
+
+zoomable_layer.append('path').datum(graticule).attrs({
+  "class": 'graticule',
+  d: path
+});
+
+d3.json("data/world-50m.json", function(error, geo_data) {
+  if (error) throw error;
+
+  var countries, countries_data;
   
-  /*window.addEventListener('resize', resize);*/
-
-  projection = d3.geoPierceQuincuncial() // N.B. geoPeirceQuincuncial in 1.1+
-    .scale(223.5)
-    .translate([width / 2, height / 2])
-    .precision(0.1);
-
-  path = d3.geoPath(projection);
-
-  graticule = d3.geoGraticule();
-
-  /*svg.append('defs').append('path').datum(graticule.outline()).attrs({
-    id: 'sphere',
+  geo_data.objects.ne_50m_admin_0_countries.geometries.sort(function(a,b){
+      return a.properties["POP_EST"] - b.properties["POP_EST"]; 
+  });
+  
+  console.log("Countries", geo_data);
+  
+  countries_data = topojson.feature(geo_data, geo_data.objects.ne_50m_admin_0_countries).features;
+  countries = contents.selectAll('.country').data(countries_data);
+  countries.enter().append('path').attrs({
+    "class": 'country',
     d: path
-  });*/
+  }).append("svg:title").text(function(a) { 
+    return a.properties.NAME_LONG;
+  });
   
-  zoomable_layer.append("path")
-    .datum({type: "Sphere"})
-    .attr("id", "sphere")
-    .attr("d", path);
-  
-  zoomable_layer.append('use').attrs({
-    "class": 'sphere_stroke',
-    'xlink:href': '#sphere'
-  });
+  labels = contents.selectAll('.label').data(countries_data);
 
-  zoomable_layer.append('use').attrs({
-    "class": 'sphere_fill',
-    'xlink:href': '#sphere'
-  });
+  baseMapRendered = true;
+  currentLayer++;
+});
 
-  contents = zoomable_layer.append('g');
-
-  zoomable_layer.append('path').datum(graticule).attrs({
-    "class": 'graticule',
-    d: path
-  });
-
- d3.json("data/world-50m.json", function(error, geo_data) {
-    if (error) throw error;
-    var countries, countries_data, en_labels, labels;
-   
-   geo_data.objects.ne_50m_admin_0_countries.geometries.sort(function(a,b){
-        return a.properties["POP_EST"] - b.properties["POP_EST"]; 
+function renderExtraLayers() {
+  if (!baseMapRendered) {
+    setTimeout(renderExtraLayers, 100);
+  } else {
+    d3.json("data/earth-lakes-2km5.geo.json", function(error, geo_data) {
+      if (error) throw error;
+    
+      console.log("Lakes", geo_data);
+    
+      contents.append("path")
+      .attrs({
+        "class": 'lake',
+        d: path(geo_data)
+      });
+    
+      currentLayer++;
     });
-   
-   console.log(geo_data);
-   
-    countries_data = topojson.feature(geo_data, geo_data.objects.ne_50m_admin_0_countries).features;
-    countries = contents.selectAll('.country').data(countries_data);
-    countries.enter().append('path').attrs({
-      "class": 'country',
-      d: path
-    }).append("svg:title").text(function(a) { 
-      return a.properties.NAME_LONG;
+    
+    d3.json("data/earth-rivers-2km5.geo.json", function(error, geo_data) {
+      if (error) throw error;
+    
+      console.log("Rivers", geo_data);
+    
+      contents.append("path")
+      .attrs({
+        "class": 'river',
+        d: path(geo_data)
+      });
+    
+      currentLayer++;
     });
-   
-    labels = contents.selectAll('.label').data(countries_data);
-    en_labels = labels.enter().append('g').attrs({
+    
+    d3.json("data/ne_50m_populated_places_simple.geo.json", function(error, geo_data) {
+      if (error) throw error;
+    
+      var cities;
+      
+      console.log("Cities", geo_data);
+
+      cities = contents.selectAll('.city').data(geo_data.features);
+      cities.enter().append('path').attrs({
+        "class": 'city',
+        d: path.pointRadius(0.1)
+      })
+      .append("svg:title").text(function(a, i) { 
+        return a.properties.name;
+      });
+
+      city_labels = contents.selectAll('.city-label').data(geo_data.features);
+    
+      currentLayer++;
+    });
+  }
+}
+
+function renderLabels() {
+  if (currentLayer < 3) {
+    setTimeout(renderLabels, 100);
+  } else {
+    var en_labels = labels.enter().append('g').attrs({
       "class": 'label',
       transform: function(d) {
         var ref, x, y;
@@ -110,12 +168,44 @@
         return "translate(" + x + "," + y + ")";
       }
     });
+  
     en_labels.classed('no_iso_code', function(d) {
       return d.properties.ISO_A2 === '-99';
     });
-    return en_labels.append('text').text(function(d) {
-      return d.properties.NAME_LONG;
-    });
-  });
+  
+    en_labels.append("image")
+      .attr("xlink:href", function(d) {
+        if (d.properties.ISO_A2 != '-99') {
+          return "flags/4x3/" + d.properties.ISO_A2.toLowerCase() + ".svg";
+        }
+      })
+      .attr("class", "country-flag")
+      .attr("width", 10)
+      .attr("height", 7.5);
+  
+    en_labels.append('text')
+      .attr("class", "country-name")
+      .text(function(d) {
+        return d.properties.NAME_LONG;
+      });
 
-}).call(this);
+      var en_city_labels = city_labels.enter().append('g').attrs({
+        "class": 'label',
+        transform: function(d) {
+          var ref, x, y;
+          ref = projection(d3.geoCentroid(d)), x = ref[0], y = ref[1];
+          return "translate(" + x + "," + y + ")";
+        }
+      });
+
+      en_city_labels.append('text')
+      .attr("class", "city-name")
+      .attr("y", 30)
+      .text(function(d) {
+        return d.properties.name;
+      });
+  }
+}
+
+renderExtraLayers();
+renderLabels();

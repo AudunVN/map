@@ -1,8 +1,21 @@
 svg {
-  background: white;
+  background: #336cc7;
   border: 1px solid black;
   width: 1000px;
   height: 1000px;
+  display: block;
+  margin: 0 auto;
+}
+
+svg.zoomed-in .country-flag,
+svg .country-name,
+svg .city-name {
+  visibility: hidden;
+}
+
+svg.zoomed-in .country-name,
+svg.zoomed-in .city-name {
+  visibility: visible;
 }
 
 .sphere_stroke {
@@ -31,8 +44,29 @@ svg {
   stroke-width: 0.5;
   vector-effect: non-scaling-stroke;
 }
+
 .country:hover {
   fill: #CCC;
+}
+
+.country-name {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.city {
+  fill: none;
+  stroke: #fd990f;
+  stroke-width: 1px;
+  stroke-linejoin: round;
+}
+
+.lake,
+.river {
+  fill: #336cc7;
+  stroke: #336cc7;
+  stroke-width: 0.5;
+  vector-effect: non-scaling-stroke;
 }
 
 .label {
