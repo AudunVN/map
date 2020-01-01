@@ -107,7 +107,7 @@ function renderExtraLayers() {
   if (!baseMapRendered) {
     setTimeout(renderExtraLayers, 100);
   } else {
-    d3.json("data/earth-lakes-2km5.geo.json", function(error, geo_data) {
+    d3.json("data/earth-lakes-10km.geo.json", function(error, geo_data) {
       if (error) throw error;
     
       console.log("Lakes", geo_data);
@@ -121,7 +121,7 @@ function renderExtraLayers() {
       currentLayer++;
     });
     
-    d3.json("data/earth-rivers-2km5.geo.json", function(error, geo_data) {
+    d3.json("data/earth-rivers-10km.geo.json", function(error, geo_data) {
       if (error) throw error;
     
       console.log("Rivers", geo_data);

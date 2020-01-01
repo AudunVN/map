@@ -116,6 +116,10 @@ body {
   font-style: italic;
 }
 
+#map * {
+  shape-rendering: optimizeSpeed;
+}
+
 .info-container {
   position: fixed;
   bottom: 0;
