@@ -13,10 +13,10 @@ height = 1000;
 zoomable_layer = svg.append('g');
 
 zoom = d3.zoom().scaleExtent([1, 50]).on('zoom', function() {
-  var e = d3.event.transform,
+  var e = d3.event.transform;
 
-  tx = Math.min(0, Math.max(e.x, width - width * e.k)),
-  ty = Math.min(0, Math.max(e.y, height - height * e.k));
+  var tx = Math.min(0, Math.max(e.x, width - width * e.k));
+  var ty = Math.min(0, Math.max(e.y, height - height * e.k));
 
   if (e.k > 7) {
     document.querySelector("svg").classList.add("zoomed-in");
@@ -271,6 +271,16 @@ function renderLabels() {
       });
   }
 }
+
+svg.on("mousemove", function() {
+  var transform = d3.zoomTransform(this);
+  var xy = transform.invert(d3.mouse(this));         
+  var pos = projection.invert(xy);
+
+  if (!isNaN(pos[0]) && !isNaN(pos[1])) {
+    document.querySelector("#current-pos").innerHTML = pos[1].toFixed(5) + "&deg;, " + pos[0].toFixed(5) + "&deg;";
+  } 
+});
 
 renderExtraLayers();
 renderLabels();

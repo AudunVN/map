@@ -1,3 +1,11 @@
+html {
+  font-family: sans-serif;
+}
+
+body {
+  background: #336cc7;
+}
+
 svg {
   background: #336cc7;
   border: 1px solid black;
@@ -105,4 +113,19 @@ svg.zoomed-in .mountain-name {
 
 .label.no_iso_code {
   font-style: italic;
+}
+
+.info-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1em;
+  background: rgba(51, 108, 199, 0.56);
+  text-align: center;
+  color: #fbfbfb;
+}
+
+#current-pos {
+  font-weight: bold;
 }
