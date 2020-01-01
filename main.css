@@ -13,6 +13,18 @@ svg .city-name {
   visibility: hidden;
 }
 
+svg [data-magnitude] {
+  visibility: hidden;
+}
+
+svg [data-magnitude='0'] {
+  visibility: visible;
+}
+
+svg.zoomed-in [data-magnitude] {
+  visibility: visible;
+}
+
 svg.zoomed-in .country-name,
 svg.zoomed-in .city-name {
   visibility: visible;
@@ -74,6 +86,12 @@ svg.zoomed-in .city-name {
   font-size: 12.5px;
   pointer-events: none;
   text-anchor: middle;
+}
+
+.sea-name {
+  fill: #243d58;
+  font-style: italic;
+  font-weight: bold;
 }
 
 .label.no_iso_code {

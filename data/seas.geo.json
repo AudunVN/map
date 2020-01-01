@@ -1,0 +1,428 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 0,
+        "name": "North Atlantic Ocean"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -38.3203125,
+          40.44694705960048
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 0,
+        "name": "South Atlantic Ocean"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -15.468749999999998,
+          -29.22889003019423
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 0,
+        "name": "Indian Ocean"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.15625,
+          -17.88583769986199
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 0,
+        "name": "South Pacific Ocean"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -146.6015625,
+          -33.7243396617476
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 0,
+        "name": "Arctic Ocean"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          166.00,
+          83.00
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 1,
+        "name": "Barents Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          42.5390625,
+          76.434603583513
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 1,
+        "name": "Bering Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -174.7265625,
+          58.63121664342478
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 0,
+        "name": "North Pacific Ocean"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -161.3671875,
+          36.03133177633187
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 1,
+        "name": "Laptev Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.57812500000003,
+          77.61770905279676
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 1,
+        "name": "Kara Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.37109374999994,
+          77.0394184427303
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 1,
+        "name": "Arabian Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          64.71875,
+          14.944784875088372
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 1,
+        "name": "Scotia Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -49.5703125,
+          -55.97379820507658
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 1,
+        "name": "Ross Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -171.5625,
+          -76.26869465080624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "Tasman Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          160.0390625,
+          -38.8225909761771
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "Coral Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          156.85156249999997,
+          -18.145851771694467
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+
+        "magnitude": 2,
+        "name": "Black Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.453125,
+          43.58039085560784
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 1,
+        "name": "Norwegian Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6796875,
+          68.97416358340674
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 1,
+        "name": "Greenland Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.109375,
+          77.76758238272801
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+
+        "magnitude": 1,
+        "name": "Baffin Bay"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -69.2578125,
+          73.62778879339942
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "Hudson Bay"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.4296875,
+          59.5343180010956
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "Gulf of Mexico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.9453125,
+          26.588527147308614
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "Caribbean Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.70703125,
+          14.774882506516272
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+
+        "magnitude": 2,
+        "name": "Sargasso Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -59.94140624999999,
+          27.839076094777816
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "Mediterranean Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.490234375,
+          35.38904996691167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "North Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.076171875,
+          56.26776108757582
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "Baltic Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.072265625,
+          56.511017504952136
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "Caspian Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.185546875,
+          42.032974332441405
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "Red Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.056640625,
+          21.207458730482642
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 2,
+        "name": "Persian Gulf"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          50.88867187499999,
+          26.82407078047018
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "magnitude": 1,
+        "name": "Beaufort Sea"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -136.0546875,
+          72.0739114882038
+        ]
+      }
+    }
+  ]
+}

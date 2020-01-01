@@ -24,6 +24,8 @@ zoom = d3.zoom().scaleExtent([1, 50]).on('zoom', function() {
     document.querySelector("svg").classList.remove("zoomed-in");
   }
 
+  document.querySelector("svg").dataset.zoomLevel = Math.floor(e.k);
+
   zoomable_layer.attrs({
     transform: [
       "translate(" + [tx, ty] + ")",
@@ -203,6 +205,34 @@ function renderLabels() {
       .attr("y", 30)
       .text(function(d) {
         return d.properties.name;
+      });
+
+      d3.json("data/seas.geo.json", function(error, geo_data) {
+        if (error) throw error;
+      
+        var seas;
+        
+        console.log("Seas", geo_data);
+  
+        sea_labels = contents.selectAll('.sea-label').data(geo_data.features);
+  
+        var en_sea_labels = sea_labels.enter().append('g').attrs({
+          "class": 'label',
+          transform: function(d) {
+            var ref, x, y;
+            ref = projection(d3.geoCentroid(d)), x = ref[0], y = ref[1];
+            return "translate(" + x + "," + y + ")";
+          }
+        });
+  
+        en_sea_labels.append('text')
+        .attr("class", "sea-name")
+        .attr("data-magnitude", function(d) {
+          return d.properties.magnitude;
+        })
+        .text(function(d) {
+          return d.properties.name;
+        });
       });
   }
 }
