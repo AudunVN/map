@@ -45,7 +45,7 @@ svg.zoomed-in .mountain-name {
 
 .graticule {
   fill: none;
-  stroke: #777;
+  stroke: #4a4a4a;
   stroke-width: 0.5px;
   stroke-opacity: 0.5;
   vector-effect: non-scaling-stroke;
