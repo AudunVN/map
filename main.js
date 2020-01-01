@@ -1,4 +1,4 @@
-var contents, graticule, height, path, projection, svg, width, zoom, zoomable_layer, labels, city_labels;
+var contents, graticule, height, path, projection, svg, width, zoom, zoomable_layer, labels, city_labels, tall_things, tall_things_labels;
 
 var currentLayer = -1;
 var baseMapRendered = false;
@@ -155,11 +155,32 @@ function renderExtraLayers() {
     
       currentLayer++;
     });
+
+    d3.json("data/ne_10m_geography_regions_elevation_points.geo.json", function(error, geo_data) {
+      if (error) throw error;
+    
+      var tall_things;
+      
+      console.log("Tall things", geo_data);
+
+      tall_things = contents.selectAll('.mountain').data(geo_data.features);
+      tall_things.enter().append('path').attrs({
+        "class": 'mountain',
+        d: path.pointRadius(0.1)
+      })
+      .append("svg:title").text(function(a, i) { 
+        return a.properties.name;
+      });
+
+      tall_things_labels = contents.selectAll('.mountain-label').data(geo_data.features);
+    
+      currentLayer++;
+    });
   }
 }
 
 function renderLabels() {
-  if (currentLayer < 3) {
+  if (currentLayer < 4) {
     setTimeout(renderLabels, 100);
   } else {
     var en_labels = labels.enter().append('g').attrs({
@@ -207,10 +228,24 @@ function renderLabels() {
         return d.properties.name;
       });
 
+      var en_tall_things_labels = tall_things_labels.enter().append('g').attrs({
+        "class": 'label',
+        transform: function(d) {
+          var ref, x, y;
+          ref = projection(d3.geoCentroid(d)), x = ref[0], y = ref[1];
+          return "translate(" + x + "," + y + ")";
+        }
+      });
+
+      en_tall_things_labels.append('text')
+      .attr("class", "mountain-name")
+      .attr("y", 30)
+      .text(function(d) {
+        return d.properties.name;
+      });
+
       d3.json("data/seas.geo.json", function(error, geo_data) {
         if (error) throw error;
-      
-        var seas;
         
         console.log("Seas", geo_data);
   
