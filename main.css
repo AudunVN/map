@@ -3,40 +3,41 @@ html {
 }
 
 body {
-  background: #336cc7;
+  background-color: #656565;
+  background-image: url("img/checkered-pattern.png");
 }
 
-svg {
+#map {
   background: #336cc7;
-  border: 1px solid black;
   width: 1000px;
   height: 1000px;
   display: block;
   margin: 0 auto;
+  box-shadow: 0 0 0.5em 0.1em rgba(0,0,0,0.25);
 }
 
-svg.zoomed-in .country-flag,
-svg .country-name,
-svg .city-name,
-svg .mountain-name {
+#map.zoomed-in .country-flag,
+#map .country-name,
+#map .city-name,
+#map .mountain-name {
   visibility: hidden;
 }
 
-svg [data-magnitude] {
+#map [data-magnitude] {
   visibility: hidden;
 }
 
-svg [data-magnitude='0'] {
+#map [data-magnitude='0'] {
   visibility: visible;
 }
 
-svg.zoomed-in [data-magnitude] {
+#map.zoomed-in [data-magnitude] {
   visibility: visible;
 }
 
-svg.zoomed-in .country-name,
-svg.zoomed-in .city-name,
-svg.zoomed-in .mountain-name {
+#map.zoomed-in .country-name,
+#map.zoomed-in .city-name,
+#map.zoomed-in .mountain-name {
   visibility: visible;
 }
 
@@ -121,7 +122,7 @@ svg.zoomed-in .mountain-name {
   left: 0;
   right: 0;
   padding: 1em;
-  background: rgba(51, 108, 199, 0.56);
+  background: rgba(101, 101, 101, 0.56);
   text-align: center;
   color: #fbfbfb;
 }
